@@ -4,18 +4,11 @@ from operator import attrgetter
 
 import unicodecsv as csv
 from django.core.exceptions import ImproperlyConfigured
-
-
-try:
-    from django.utils.encoding import force_text
-except ImportError:  # Django < 1.4
-    from django.utils.encoding import force_unicode as force_text
+from django.utils.encoding import force_str as force_text
 
 
 def get_pretty_name(accessor):
-    return accessor.replace('_', ' ') \
-        .replace('.', ' ') \
-        .capitalize()
+    return accessor.replace("_", " ").replace(".", " ").capitalize()
 
 
 def Getter(accessor, normalizer=lambda x: x):
@@ -28,7 +21,7 @@ def Getter(accessor, normalizer=lambda x: x):
         short_description = get_pretty_name(accessor)
         accessor = attrgetter(accessor)
     else:
-        short_description = getattr(accessor, 'short_description', None)
+        short_description = getattr(accessor, "short_description", None)
 
     def getter(obj):
         ret = accessor(obj)
@@ -44,7 +37,7 @@ def Getter(accessor, normalizer=lambda x: x):
 
 
 # Should these be i18nized?
-bool2string_map = {True: 'Yes', False: 'No'}
+bool2string_map = {True: "Yes", False: "No"}
 
 BooleanGetter = partial(Getter, normalizer=bool2string_map.get)
 
@@ -54,7 +47,7 @@ def DisplayGetter(accessor, *args, **kwargs):
     Returns a Getter that gets the display name for a model field with choices.
     """
     short_description = get_pretty_name(accessor)
-    accessor = 'get_%s_display' % accessor
+    accessor = "get_%s_display" % accessor
     getter = Getter(accessor, *args, **kwargs)
     getter.short_description = short_description
     return getter
@@ -64,7 +57,7 @@ class ColumnSerializer(object):
     output_headers = True
 
     def __init__(self, columns, **kwargs):
-        self.output_headers = kwargs.get('output_headers', self.output_headers)
+        self.output_headers = kwargs.get("output_headers", self.output_headers)
         self.normalized_columns = list(map(self._normalize_column, columns))
 
     def __call__(self, queryset, file=None):
@@ -86,7 +79,7 @@ class ColumnSerializer(object):
 
         if file is None:
             output.seek(0)
-            return output.read().decode('utf-8')
+            return output.read().decode("utf-8")
 
     def format_header(self, column):
         if self.output_headers:
