@@ -11,32 +11,33 @@ from .utils import ColumnSerializer
 
 
 def encode_header(value):
-    return Header(value, 'utf-8').encode()
+    return Header(value, "utf-8").encode()
 
 
 class CsvResponse(HttpResponse):
-    def __init__(self, filename, content_type='text/csv', **kwargs):
+    def __init__(self, filename, content_type="text/csv", **kwargs):
         super(CsvResponse, self).__init__(content_type=content_type, **kwargs)
-        disposition = 'attachment; filename="{0}"'.format(filename)
+        disposition = 'attachment; filename="{}"'.format(filename)
         # BBB: Django 1.4 and earlier didn't support non-ASCII headers.  Later
         # versions do this for us.
         if django.VERSION < (1, 5):
             disposition = encode_header(disposition)
-        self['Content-Disposition'] = disposition
+        self["Content-Disposition"] = disposition
 
 
 class CsvResponseMixin(MultipleObjectMixin):
     """
     A ListView mixin that returns a CsvResponse.
     """
+
     response_class = CsvResponse
     column_serializer_class = ColumnSerializer
     columns = None
     output_headers = True
-    filename = '{model_name}_list.csv'
+    filename = "{model_name}_list.csv"
 
     def render_to_response(self, context, **kwargs):
-        queryset = context['object_list']
+        queryset = context["object_list"]
         model = queryset.model
         response = self.response_class(
             filename=self.get_filename(model),
@@ -56,7 +57,7 @@ class CsvResponseMixin(MultipleObjectMixin):
 
     def get_columns(self, model):
         if self.columns is None:
-            raise ImproperlyConfigured('Please set the columns.')
+            raise ImproperlyConfigured("Please set the columns.")
         return self.columns
 
     def get_filename(self, model):
