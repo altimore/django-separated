@@ -45,3 +45,7 @@ changelog_start_rev = "1.1.2"
 version_files = [
   "pyproject.toml:version",
 ]
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"

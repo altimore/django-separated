@@ -9,3 +9,4 @@ dist/
 test_project/backup
 .tox/
 *.~undo-tree~
+poetry.lock
