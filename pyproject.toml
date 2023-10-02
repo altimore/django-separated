@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "django-separated"
-version = "1.1.4"
+version = "1.1.5"
 description = "Class-based view and mixins for handling CSV with Django."
 keywords = [
          "django",
@@ -31,7 +31,7 @@ packages = [
 python = "^3.9.6"
 unicodecsv = "^0.14.1"
 Django = "^4.0.3"
-pre-commit = "^2.17.0"
+pre-commit = "^3.4.0"
 
 [tool.poetry.group.dev.dependencies]
 commitizen = "^2.36.0"
