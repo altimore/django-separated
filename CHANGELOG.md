@@ -1,3 +1,9 @@
+## 1.1.5 (2024-02-13)
+
+### Fix
+
+- updated the pre-commit to the latest version
+
 ## 1.1.4 (2022-10-28)
 
 ### Fix
