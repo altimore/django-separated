@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "django-separated"
-version = "1.1.5"
+version = "1.1.6"
 description = "Class-based view and mixins for handling CSV with Django."
 keywords = ["django", "csv", "class-based", "views"]
 classifiers = [
@@ -32,7 +32,7 @@ pre-commit = "^3.6.1"
 
 [tool.commitizen]
 name = "cz_conventional_commits"
-version = "1.1.5"
+version = "1.1.6"
 tag_format = "$version"
 changelog_start_rev = "1.1.2"
 version_files = ["pyproject.toml:version"]
