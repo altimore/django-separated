@@ -21,7 +21,7 @@ readme = "README.rst"
 packages = [{ include = "separated" }]
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = ">=3.9,<4.0"
 unicodecsv = "^0.14.1"
 Django = "^5.0.2"
 
